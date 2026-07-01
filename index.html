@@ -92,23 +92,23 @@
   #main.show { display: block; }
 
   .site-header {
-    background: var(--ink); padding: 2rem 0 0;
-    text-align: center; border-bottom: 2px solid var(--gold);
+    background: #e8f0e4; padding: 2rem 0 0;
+    text-align: center; border-bottom: 2px solid #7a9a70;
     position: sticky; top: 0; z-index: 50;
   }
   .site-title {
     font-family: 'STLiti', 'LiSu', 'FangSong', serif;
     font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700;
-    color: var(--gold-lt); letter-spacing: 0.5em; text-indent: 0.5em;
-    text-shadow: 0 1px 8px rgba(181,137,74,0.4); margin-bottom: 1.5rem;
+    color: #2a4a22; letter-spacing: 0.5em; text-indent: 0.5em;
+    text-shadow: 0 1px 4px rgba(100,140,80,0.3); margin-bottom: 1.5rem;
   }
 
   /* ── NAV ── */
-  nav { display: flex; justify-content: center; border-top: 1px solid rgba(181,137,74,0.2); }
+  nav { display: flex; justify-content: center; border-top: 1px solid rgba(90,138,80,0.25); }
   nav .nav-item { position: relative; }
   nav button {
     background: transparent; border: none;
-    color: rgba(212,170,106,0.7); font-family: inherit;
+    color: #3d5a35; font-family: inherit;
     font-size: clamp(0.85rem, 2vw, 1rem); letter-spacing: 0.25em;
     padding: 0.9rem clamp(1rem, 3vw, 2.5rem);
     cursor: pointer; position: relative; transition: color 0.3s;
@@ -119,7 +119,7 @@
     bottom: 0; left: 20%; right: 20%; height: 2px;
     background: var(--gold); transform: scaleX(0); transition: transform 0.3s;
   }
-  nav button:hover, nav button.active { color: var(--gold-lt); }
+  nav button:hover, nav button.active { color: #1a3a14; }
   nav button.active::after, nav button:hover::after { transform: scaleX(1); }
 
   /* ── POEM DROPDOWN ── */
@@ -128,8 +128,8 @@
     position: absolute; top: 100%; left: 0;
     min-width: 220px; max-height: 320px;
     overflow-y: auto;
-    background: #221508;
-    border: 1px solid rgba(181,137,74,0.35);
+    background: #f0f5ee;
+    border: 1px solid rgba(90,138,80,0.35);
     border-top: none;
     z-index: 200;
     box-shadow: 4px 8px 24px rgba(0,0,0,0.5);
@@ -139,9 +139,9 @@
   .poem-dropdown::-webkit-scrollbar-thumb { background: rgba(181,137,74,0.3); border-radius: 2px; }
   .poem-dropdown a {
     display: block; padding: 0.65rem 1.2rem;
-    color: rgba(212,170,106,0.75); font-size: 0.88rem;
+    color: #2a4a22; font-size: 0.88rem;
     letter-spacing: 0.1em; text-decoration: none;
-    border-bottom: 1px solid rgba(181,137,74,0.1);
+    border-bottom: 1px solid rgba(90,138,80,0.15);
     transition: background 0.2s, color 0.2s;
     cursor: pointer;
   }
@@ -151,9 +151,9 @@
   .yl-sub-wrap { position: relative; }
   .yl-sub-trigger {
     display: block; padding: 0.65rem 1.2rem;
-    color: rgba(212,170,106,0.75); font-size: 0.88rem;
+    color: #2a4a22; font-size: 0.88rem;
     letter-spacing: 0.1em; text-decoration: none;
-    border-bottom: 1px solid rgba(181,137,74,0.1);
+    border-bottom: 1px solid rgba(90,138,80,0.15);
     cursor: pointer; transition: background 0.2s, color 0.2s;
   }
   .yl-sub-trigger:hover { background: rgba(181,137,74,0.15); color: var(--gold-lt); }
@@ -171,7 +171,7 @@
     display: block; padding: 0.65rem 1.2rem;
     color: rgba(212,170,106,0.75); font-size: 0.85rem;
     letter-spacing: 0.1em; cursor: pointer;
-    border-bottom: 1px solid rgba(181,137,74,0.1);
+    border-bottom: 1px solid rgba(90,138,80,0.15);
     transition: background 0.2s, color 0.2s;
   }
   .yl-submenu a:hover { background: rgba(181,137,74,0.15); color: var(--gold-lt); }
@@ -385,14 +385,24 @@
 <!-- MAIN -->
 <div id="main">
   <header class="site-header">
-    <div class="site-title">自　娱　草</div>
+    <div class="site-title">静茶先生诗集</div>
     <nav>
       <div class="nav-item" id="nav-shi-wrap">
         <button id="nav-shi-btn" onclick="togglePoemMenu(event)">诗　▾</button>
         <div class="poem-dropdown" id="poem-menu">
           <a onclick="showPoem(0)">宿尤兄舍抵足话旧</a>
           <a onclick="showPoem(1)">调尤兄</a>
-          <!-- 更多诗题将在此添加 -->
+          <a onclick="showPoem(2)">送俞兄归渡春节</a>
+          <a onclick="showPoem(3)">五十感怀（一）</a>
+          <a onclick="showPoem(4)">五十感怀（二）</a>
+          <a onclick="showPoem(5)">五十感怀（三）</a>
+          <a onclick="showPoem(6)">五十感怀（四）</a>
+          <a onclick="showPoem(7)">生活小诗·读书</a>
+          <a onclick="showPoem(8)">生活小诗·喝茶</a>
+          <a onclick="showPoem(9)">生活小诗·写诗</a>
+          <a onclick="showPoem(10)">生活小诗·吸烟</a>
+          <a onclick="showPoem(11)">生活小诗·围棋</a>
+          <a onclick="showPoem(12)">生活小诗·饮酒</a>
         </div>
       </div>
       <div class="nav-item" id="nav-ci-wrap">
@@ -546,8 +556,135 @@ const poems = [
       { text: '弥漫烟水长江渡，' },
       { text: '应有渔人泛客槎。', ann: [{ word: '槎', note: '音叉，用竹或木编成的航行之物，即筏，借指船。' }] },
     ]
-  }
-]
+  },
+  {
+    title: '送俞兄归渡春节',
+    lines: [
+      { text: '严寒今杀势，佳节领春回。' },
+      { text: '暂息经劳体，勤亲浊酒杯。' },
+      { text: '丝歌君莫辍，啸咏我思追。' },
+      { text: '好葆浩然气，他年期並扉。', ann: [{ word: '並扉', note: '门靠着门，意为邻居。' }] },
+    ]
+  },
+  {
+    title: '五十感怀（一）',
+    lines: [
+      { text: '行年忽五十，此身不自期。' },
+      { text: '眼耳就昏瞆，齿牙幸稳齐。', ann: [{ word: '就', note: '走向，接近。' }] },
+      { text: '忆昔游钓侣，泰半委尘泥。', ann: [{ word: '泰半', note: '泰同太，太半即大半。' }, { word: '委', note: '交付。' }] },
+      { text: '天公遗我厚，敢嗟生理微？' },
+    ],
+    note: '遗：同馈，即给与。'
+  },
+  {
+    title: '五十感怀（二）',
+    lines: [
+      { text: '大鹏抟九万，鹪鹩恋一枝。', ann: [{ word: '鹪鹩', note: '音jiāo liáo，一种小鸟。' }, { word: '抟', note: '音团，凭借（风力）盘旋飞翔。' }] },
+      { text: '我无垂天翼，卑蓬乐安栖。' },
+      { text: '朝起汲清浅，暮归慎门扉。' },
+      { text: '悠悠冬复夏，仰观岁时移。' },
+    ],
+    note: '大鹏抟九万：引自《庄子·逍遥游》："鹏之徙于南冥也，水击三千里，抟扶摇而上者九万里"。扶摇：旋风，盘旋而上的暴风。'
+  },
+  {
+    title: '五十感怀（三）',
+    lines: [
+      { text: '生事寄陋巷，情亲抚群儿。' },
+      { text: '晨兴各就役，夕归还相依。' },
+      { text: '灯大一室里，欢然尽饘糜。', ann: [{ word: '饘糜', note: '音（zhān mí），粥。' }] },
+      { text: '摩腹时一啸，忽复朝市遗。', ann: [{ word: '朝市', note: '尘世。' }] },
+    ]
+  },
+  {
+    title: '五十感怀（四）',
+    lines: [
+      { text: '众竞我不预，人弃我取之。', ann: [{ word: '预', note: '干预。' }] },
+      { text: '缁衣蒙尘少，阳春属和稀。' },
+      { text: '鱼鸟有至性，山水多清晖。' },
+      { text: '千古陶彭泽，遗风在东篱。' },
+    ]
+  },
+  {
+    title: '生活小诗六题·读书',
+    lines: [
+      { text: '俗事无情趣，一卷寄闲适。' },
+      { text: '初意只如此，浸润成嗜癖。', ann: [{ word: '嗜', note: '音shì，嗜好，成癖。' }] },
+      { text: '欲罢忽不能，始惊恶缘结。' },
+      { text: '自觉成书痴，迂腐不可诘。' },
+      { text: '世事日以疏，人情为隔阂。' },
+      { text: '眼昏心手软，四体垂垂弱。' },
+      { text: '牛角钻弥坚，哀哉成痼疾。' },
+      { text: '圣贤岂悮人，书此用自惕。', ann: [{ word: '悮', note: '同误。' }] },
+    ]
+  },
+  {
+    title: '生活小诗六题·喝茶',
+    lines: [
+      { text: '静坐无良朋，间庭走日月。' },
+      { text: '眼前何茫茫，此情欲奚适。', ann: [{ word: '奚', note: '文言，何。' }] },
+      { text: '多谢陆夫子，恵我驱愁术。' },
+      { text: '寒泉清无滓，相对看青碧。' },
+      { text: '幽情入一壶，遗此朝市热。' },
+      { text: '不觉街声远，讵知光阴逼。', ann: [{ word: '讵', note: '音jù，怎知。' }] },
+      { text: '松竹忽入座，岩溪静在侧。' },
+      { text: '翛然不可言，终古成一夕。', ann: [{ word: '翛然', note: '音xiāo，清静自然。' }] },
+    ]
+  },
+  {
+    title: '生活小诗六题·写诗',
+    lines: [
+      { text: '人生非木石，衷心有哀乐。' },
+      { text: '圣云诗言志，嗟我仰何及。' },
+      { text: '些些小夫情，随手寄翰墨。' },
+      { text: '无关达人赏，聊以娱晨夕。' },
+      { text: '春鸟鸣树枝，寒虫响阶壁。' },
+      { text: '岂有其它哉，悠悠只自述。' },
+      { text: '陶公妙难言，怀沙良可惜。', ann: [{ word: '怀沙', note: '屈原所作《怀沙》赋。' }, { word: '良', note: '确实。' }] },
+      { text: '坐看明月上，轩窗一片白。' },
+    ]
+  },
+  {
+    title: '生活小诗六题·吸烟',
+    lines: [
+      { text: '呜呼淡巴菇，披靡无雅俗。', ann: [{ word: '淡巴菇', note: '香烟的英文tobacco的音译。' }] },
+      { text: '嗟我也罹此，泥淖不自拔。' },
+      { text: '读书生感慨，阅事惊南北。' },
+      { text: '忧端结中肠，赖此为一泄。' },
+      { text: '高人百世上，奇功成绝域。' },
+      { text: '仰慕不可言，一枝聊自释。' },
+      { text: '稔知腐肺肝，其奈快一霎。' },
+      { text: '撙节衣食资，弥此无底窟。' },
+    ],
+    note: '惊南北：黄坚庭《次王荆公题西太一宫壁韵》：真是真非安在，人间北看成南。'
+  },
+  {
+    title: '生活小诗六题·围棋',
+    lines: [
+      { text: '白发欲满头，胜心未全戢。', ann: [{ word: '戢', note: '音jí，停止。' }] },
+      { text: '偶逢曹刘俦，犹整旗鼓敌。', ann: [{ word: '俦', note: '音chóu，同辈。' }] },
+      { text: '密室对枯枰，眈眈坐屏息。' },
+      { text: '烟长一寸灭，眉皱十道结。' },
+      { text: '岂计光阴转，浑忘寒暑逼。' },
+      { text: '严阵结长围，短兵奋孤窟。' },
+      { text: '烬死竞复燃，陇收顾遗蜀。' },
+      { text: '战罢还携手，一奁盛黑白。', ann: [{ word: '奁', note: '音lián，盒子。' }, { word: '枰', note: '音píng，棋局。' }] },
+    ]
+  },
+  {
+    title: '生活小诗六题·饮酒',
+    lines: [
+      { text: '阮生哭歧路，还来勤杯勺。' },
+      { text: '陶公辞印绶，归去醉黄菊。' },
+      { text: '伯伦日沉迷，鹿车随长锸。', ann: [{ word: '伯伦', note: '刘伶，竹林七贤之一。' }, { word: '锸', note: '音chā，铁锹。' }] },
+      { text: '高情何悠哉，逝去不可作。' },
+      { text: '偶有一壶酒，闭门酬风月。' },
+      { text: '飞鸟鸣相和，浮云翔寥廓。' },
+      { text: '身世同一晌，鸡虫两相失。' },
+      { text: '眼底星物换，稊米逐死甓。', ann: [{ word: '甓', note: '音pì，砖。' }] },
+    ],
+    note: '《庄子》：道鸟乎在？曰：在稊（tí）米。何其下也？曰：在瓦甓。何其愈下也？曰：在尿溺。'
+  },
+];
 
 // Store annotations globally so onclick can reference by index
 const annData = {};
@@ -611,10 +748,17 @@ function showPoem(idx) {
 showPoem(0);
 
 // ── 下拉菜单（诗）──
+function closeAllMenus() {
+  ['poem-menu','ci-menu','yl-menu','yl-submenu','bio-menu','search-menu'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('open');
+  });
+}
 function togglePoemMenu(e) {
   e.stopPropagation();
-  const menu = document.getElementById('poem-menu');
-  menu.classList.toggle('open');
+  const isOpen = document.getElementById('poem-menu').classList.contains('open');
+  closeAllMenus();
+  if (!isOpen) document.getElementById('poem-menu').classList.add('open');
 }
 document.addEventListener('click', () => {
   document.getElementById('poem-menu').classList.remove('open');
@@ -632,6 +776,7 @@ const ciList = [
       { text: '四壁萧条厨柜空，' },
       { text: '饭疏饮水未嫌穷。' },
       { text: '将雏携妇仍从容。', ann: [{ word: '将雏', note: '带着孩子。雏：幼鸟。' }] },
+      { text: '', stanzaBreak: true },
       { text: '自古圣贤多寂寞，' },
       { text: '缘溪杨柳舞轻风。' },
       { text: '乘闲且过小桥东。' },
@@ -659,6 +804,7 @@ function renderCi(idx) {
     ${subtitleHtml}
     <div class="poem-body">`;
   p.lines.forEach((line, li) => {
+    if (line.stanzaBreak) { html += `<p>&nbsp;</p>`; return; }
     let lineHtml = line.text;
     if (line.ann) {
       line.ann.forEach((a, ai) => {
@@ -672,6 +818,7 @@ function renderCi(idx) {
     }
     html += `<p>${lineHtml}</p>`;
   });
+  if (p.note) html += `<div class="poem-note">【注】${p.note}</div>`;
   html += `</div></div>`;
   document.getElementById('ci-display').innerHTML = html;
 }
@@ -780,8 +927,9 @@ renderYl('xu-yu');
 
 function toggleCiMenu(e) {
   e.stopPropagation();
-  const menu = document.getElementById('ci-menu');
-  menu.classList.toggle('open');
+  const isOpen = document.getElementById('ci-menu').classList.contains('open');
+  closeAllMenus();
+  if (!isOpen) document.getElementById('ci-menu').classList.add('open');
 }
 
 // ── 作者自传 ──
@@ -846,10 +994,9 @@ function showBio(key) {
 
 function toggleBioMenu(e) {
   e.stopPropagation();
-  document.getElementById('poem-menu').classList.remove('open');
-  document.getElementById('ci-menu').classList.remove('open');
-  document.getElementById('yl-menu').classList.remove('open');
-  document.getElementById('bio-menu').classList.toggle('open');
+  const isOpen = document.getElementById('bio-menu').classList.contains('open');
+  closeAllMenus();
+  if (!isOpen) document.getElementById('bio-menu').classList.add('open');
 }
 
 // 默认显示作者自传
