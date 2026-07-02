@@ -253,19 +253,7 @@
 
 <script>
 // ── 密码 ──
-document.getElementById('pwd-input').addEventListener('input', function() {
-  document.getElementById('pwd-error').textContent = '';
-  if (this.value.length === 4) {
-    if (this.value === '2606') {
-      const splash = document.getElementById('splash');
-      splash.classList.add('hide');
-      setTimeout(() => { splash.style.display='none'; document.getElementById('main').classList.add('show'); }, 800);
-    } else {
-      document.getElementById('pwd-error').textContent = '密码有误，请重试';
-      this.value = ''; this.focus();
-    }
-  }
-});
+
 
 // ── 诗库 ──
 const poems = [
@@ -1040,8 +1028,10 @@ function showPoem(idx) {
 renderPoem(0);
 
 // ── 自动生成诗菜单 ──
-(function buildPoemMenu() {
+function buildPoemMenu() {
   const menu = document.getElementById('poem-menu');
+  if (!menu) return;
+  menu.innerHTML = '';
   poems.forEach((p, i) => {
     if (!p || !p.title) return;
     const a = document.createElement('a');
@@ -1049,11 +1039,13 @@ renderPoem(0);
     a.onclick = () => showPoem(i);
     menu.appendChild(a);
   });
-})();
+}
 
 // ── 自动生成词菜单 ──
-(function buildCiMenu() {
+function buildCiMenu() {
   const menu = document.getElementById('ci-menu');
+  if (!menu) return;
+  menu.innerHTML = '';
   ciList.forEach((p, i) => {
     if (!p || !p.title) return;
     const a = document.createElement('a');
@@ -1061,7 +1053,27 @@ renderPoem(0);
     a.onclick = () => showCi(i);
     menu.appendChild(a);
   });
-})();
+}
+
+// 在密码正确进入主页后才生成菜单
+document.getElementById('pwd-input').addEventListener('input', function() {
+  document.getElementById('pwd-error').textContent = '';
+  if (this.value.length === 4) {
+    if (this.value === '2606') {
+      const splash = document.getElementById('splash');
+      splash.classList.add('hide');
+      setTimeout(() => {
+        splash.style.display='none';
+        document.getElementById('main').classList.add('show');
+        buildPoemMenu();
+        buildCiMenu();
+      }, 800);
+    } else {
+      document.getElementById('pwd-error').textContent = '密码有误，请重试';
+      this.value = ''; this.focus();
+    }
+  }
+});
 
 function renderCi(idx) {
   const p = ciList[idx];
