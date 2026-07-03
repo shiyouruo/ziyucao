@@ -6,14 +6,13 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>静茶先生诗集</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&display=swap');
   * { margin:0; padding:0; box-sizing:border-box; }
   :root {
     --ink: #1a1209; --ink-soft: #3d2f1a;
     --gold: #b5894a; --gold-lt: #d4aa6a;
     --silk: #f5f0e8; --silk-dk: #ede4d0; --paper: #faf7f0;
   }
-  html,body { height:100%; font-family:'Noto Serif SC','STSong','SimSun',serif; background:var(--paper); color:var(--ink); overflow-x:hidden; }
+  html,body { height:100%; font-family:'STSong','SimSun','宋体','Songti SC','Georgia',serif; background:var(--paper); color:var(--ink); overflow-x:hidden; }
 
   /* SPLASH */
   #splash {
@@ -127,8 +126,8 @@
   .search-box { display:flex; gap:0.75rem; margin-bottom:2rem; flex-wrap:wrap; }
   .search-box input { flex:1; min-width:180px; border:1px solid var(--silk-dk); border-radius:2px; font-family:inherit; font-size:1rem; padding:0.7rem 1rem; background:var(--silk); color:var(--ink); outline:none; transition:border-color 0.3s; }
   .search-box input:focus { border-color:var(--gold); }
-  .search-box button { background:var(--ink); border:none; border-radius:2px; color:var(--gold-lt); font-family:inherit; font-size:0.9rem; letter-spacing:0.2em; padding:0.7rem 1.6rem; cursor:pointer; transition:background 0.3s; }
-  .search-box button:hover { background:var(--ink-soft); }
+  .search-box button { background:#5a8a50; border:none; border-radius:2px; color:#fff; font-family:inherit; font-size:0.9rem; letter-spacing:0.2em; padding:0.7rem 1.6rem; cursor:pointer; transition:background 0.3s; }
+  .search-box button:hover { background:#3d6635; }
   #char-result { background:var(--silk); border:1px solid var(--silk-dk); border-radius:2px; padding:1.5rem 1.8rem; line-height:2; font-size:0.95rem; color:var(--ink-soft); min-height:3rem; }
   #char-result .char-big { font-size:2.5rem; font-weight:700; color:var(--ink); float:left; margin-right:1.2rem; margin-top:0.1rem; line-height:1; }
   .loading { text-align:center; color:var(--gold); font-size:0.9rem; letter-spacing:0.3em; padding:2rem; opacity:0.7; }
@@ -138,6 +137,11 @@
   .yunlu-section { margin-bottom:2rem; padding:1.5rem; background:var(--silk); border:1px solid var(--silk-dk); border-radius:2px; }
   .yunlu-section h3 { font-size:1rem; font-weight:600; letter-spacing:0.2em; color:var(--gold); margin-bottom:0.8rem; padding-bottom:0.5rem; border-bottom:1px solid var(--silk-dk); }
 
+  .poem-nav { display:flex; justify-content:space-between; align-items:center; margin-top:1.5rem; padding-top:1rem; border-top:1px solid var(--silk-dk); }
+  .poem-nav button { background:transparent; border:1px solid rgba(90,138,80,0.4); border-radius:2px; color:#3d5a35; font-family:inherit; font-size:0.9rem; letter-spacing:0.15em; padding:0.5rem 1.2rem; cursor:pointer; transition:all 0.2s; }
+  .poem-nav button:hover { background:rgba(90,138,80,0.1); border-color:#5a8a50; }
+  .poem-nav button:disabled { opacity:0.3; cursor:default; }
+  .poem-nav .nav-counter { font-size:0.8rem; color:#9e8860; letter-spacing:0.1em; }
   footer { text-align:center; padding:2rem; color:#9e8860; font-size:0.78rem; letter-spacing:0.2em; border-top:1px solid var(--silk-dk); margin-top:3rem; }
   @media(max-width:600px) { nav button { padding:0.8rem 0.9rem; font-size:0.8rem; } .content { padding:2rem 1rem; } .poem-card { padding:1.2rem 1rem; } .poem-dropdown { min-width:160px; } }
 </style>
@@ -240,7 +244,7 @@
         <div class="poem-card">
           <div class="poem-title" style="font-size:0.95rem;color:var(--gold);">◈ 诗词全文搜索</div>
           <div class="search-box" style="margin-top:1rem;">
-            <input id="poem-search-input" type="text" placeholder="输入关键词搜索诗句…">
+            <input id="poem-search-input" type="text" placeholder="输入关键词搜索诗句…" onkeydown="if(event.key==='Enter'){event.preventDefault();searchPoems();}">
             <button onclick="searchPoems()">搜　索</button>
           </div>
           <div id="poem-search-result" style="color:#7a6040;font-size:0.9rem;letter-spacing:0.1em;">输入关键词后点击搜索。</div>
@@ -1167,7 +1171,10 @@ const bioContent = {
 // ── annData ──
 const annData = {};
 
+let currentPoemIdx = 0;
+
 function renderPoem(idx) {
+  currentPoemIdx = idx;
   const p = poems[idx];
   let subtitleHtml = '';
   if (p.subtitle) {
@@ -1197,6 +1204,13 @@ function renderPoem(idx) {
     const noteHtml = noteLines.map(l => `<div style="margin-bottom:0.3rem;">${l}</div>`).join('');
     html += `<div class="poem-note">${noteHtml}</div>`;
   }
+  // Navigation buttons
+  const total = poems.length;
+  html += `<div class="poem-nav">
+    <button onclick="showPoem(${idx-1})" ${idx===0?'disabled':''}>◀ 上一首</button>
+    <span class="nav-counter">${idx+1} / ${total}</span>
+    <button onclick="showPoem(${idx+1})" ${idx===total-1?'disabled':''}>下一首 ▶</button>
+  </div>`;
   html += `</div></div>`;
   document.getElementById('poem-display').innerHTML = html;
 }
@@ -1259,7 +1273,10 @@ document.getElementById('pwd-input').addEventListener('input', function() {
   }
 });
 
+let currentCiIdx = 0;
+
 function renderCi(idx) {
+  currentCiIdx = idx;
   const p = ciList[idx];
   let html = `<div class="poem-card"><div class="poem-title">${p.title}</div><div class="poem-body">`;
   p.lines.forEach((line,li) => {
@@ -1280,6 +1297,13 @@ function renderCi(idx) {
     const noteHtml = noteLines.map(l => `<div style="margin-bottom:0.3rem;">${l}</div>`).join('');
     html += `<div class="poem-note">${noteHtml}</div>`;
   }
+  // Navigation buttons
+  const totalCi = ciList.length;
+  html += `<div class="poem-nav">
+    <button onclick="showCi(${idx-1})" ${idx===0?'disabled':''}>◀ 上一首</button>
+    <span class="nav-counter">${idx+1} / ${totalCi}</span>
+    <button onclick="showCi(${idx+1})" ${idx===totalCi-1?'disabled':''}>下一首 ▶</button>
+  </div>`;
   html += `</div></div>`;
   document.getElementById('ci-display').innerHTML = html;
 }
@@ -1365,7 +1389,7 @@ function renderBio(key) {
   if (!c) return;
   document.getElementById('bio-heading').textContent = c.title;
   if (c.type === 'article') {
-    document.getElementById('bio-display').innerHTML = `<div class="bio-text"><p>${c.body}</p></div>`;
+    document.getElementById('bio-display').innerHTML = `<div class="poem-card"><div class="poem-title">${c.title}</div><div class="bio-text"><p>${c.body}</p></div></div>`;
     return;
   }
   if (!c.photos || c.photos.length === 0) {
@@ -1409,53 +1433,19 @@ function showSearchSub(which) {
 }
 
 // ── 离线词典 + 联网备用 ──
-const charDict = {
-  '曦':{pinyin:'xī',meaning:'日光，阳光。多用于诗文中形容晨光、朝阳。',example:'如：晨曦、曦光。'},
-  '蛩':{pinyin:'qióng',meaning:'蟋蟀的别称。古诗文中常借蟋蟀之鸣写秋夜的寂寥。',example:'如：寒蛩。'},
-  '槎':{pinyin:'chá',meaning:'用竹或木编成的筏子，借指小船。',example:'如：泛客槎。'},
-  '雏':{pinyin:'chú',meaning:'幼小的鸟，引申指年幼的孩子。',example:'如：将雏。'},
-  '怙':{pinyin:'hù',meaning:'依靠，凭借。"失怙"指年幼丧父。',example:'如：失怙恃。'},
-  '恃':{pinyin:'shì',meaning:'依靠，依赖。常与"怙"连用指代父母。',example:'如：失怙恃。'},
-  '箧':{pinyin:'qiè',meaning:'小箱子，用来收藏物品或文稿。',example:'如：箧笥。'},
-  '笥':{pinyin:'sì',meaning:'盛饭食或衣物的方形竹器，亦指书箱。',example:'如：箧笥。'},
-  '饘':{pinyin:'zhān',meaning:'稠粥。',example:'如：饘糜（粥）。'},
-  '糜':{pinyin:'mí',meaning:'粥。',example:'如：饘糜（粥）。'},
-  '戢':{pinyin:'jí',meaning:'停止，收敛。',example:'如：胜心未全戢。'},
-  '俦':{pinyin:'chóu',meaning:'同辈，同伴。',example:'如：偶逢曹刘俦。'},
-  '奁':{pinyin:'lián',meaning:'古代女子存放梳妆用品的盒子。',example:'如：一奁盛黑白。'},
-  '甓':{pinyin:'pì',meaning:'砖。',example:'如：稊米逐死甓。'},
-  '塍':{pinyin:'chéng',meaning:'田间小路或田埂。',example:'如：时见牛年下夕塍。'},
-  '讵':{pinyin:'jù',meaning:'怎知，岂。',example:'如：讵知光阴逼。'},
-  '牍':{pinyin:'dú',meaning:'古代写字用的木片。',example:'如：孟公书牍。'},
-  '筠':{pinyin:'yún',meaning:'竹子（此读音）。',example:'如：挥筠毫。'},
-  '柝':{pinyin:'tuò',meaning:'古代打更的梆子。',example:'如：闻柝夜。'},
-};
-
 function lookupChar() {
   const ch = document.getElementById('char-input').value.trim();
   const box = document.getElementById('char-result');
   if (!ch) { box.innerHTML = '请先输入要查询的汉字。'; return; }
-  const chars = [...ch];
-  const found = chars.filter(c => charDict[c]);
-  const notFound = chars.filter(c => !charDict[c]);
-  let html = '';
-  found.forEach(c => {
-    const d = charDict[c];
-    html += `<div style="margin-bottom:1rem;"><span class="char-big">${c}</span><div style="overflow:hidden;line-height:2;"><strong>拼音：</strong>${d.pinyin}<br><strong>释义：</strong>${d.meaning}<br>${d.example?`<strong>用例：</strong>${d.example}`:''}</div><div style="clear:both;"></div></div>`;
-  });
-  if (notFound.length === 0) { box.innerHTML = html; return; }
-  box.innerHTML = html + `<div id="online-lookup-area"><div class="loading">「${notFound.join('')}」词典未收录，正在尝试联网查询…</div></div>`;
-  fetch('https://api.anthropic.com/v1/messages', {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:`请解释汉字"${notFound.join('、')}"的读音（拼音）、字义，以及在古典诗词中的用法举例。每字简洁说明，不超过150字。`}]})
-  }).then(r=>r.json()).then(data=>{
-    const text = data.content?.map(i=>i.text||'').join('')||'未能获取释义。';
-    const area = document.getElementById('online-lookup-area');
-    if(area) area.innerHTML=`<div style="line-height:2;">${text.split('\n').join('<br>')}</div>`;
-  }).catch(()=>{
-    const area = document.getElementById('online-lookup-area');
-    if(area) area.innerHTML=`<div style="color:#a03010;line-height:1.8;">「${notFound.join('')}」词典未收录，且联网查询失败（本地打开网页文件时无法联网；部署上线后可正常使用）。</div>`;
-  });
+  box.innerHTML = `<div style="padding:0.5rem 0;font-size:1rem;line-height:2.2;">
+    <span style="font-size:2rem;font-weight:700;float:left;margin-right:1rem;line-height:1;">${ch}</span>
+    <div style="overflow:hidden;">
+      点击下面链接在汉典网查询：<br>
+      <a href="https://www.zdic.net/hans/${ch}" target="_blank"
+         style="color:#1a5cb5;font-size:1rem;">📖 在汉典网查询「${ch}」</a>
+    </div>
+    <div style="clear:both;"></div>
+  </div>`;
 }
 
 function searchPoems() {
@@ -1483,7 +1473,7 @@ function toggleSearchMenu(e) { e.stopPropagation(); const isOpen=document.getEle
 document.addEventListener('click', closeAllMenus);
 
 document.getElementById('char-input').addEventListener('keydown', e=>{ if(e.key==='Enter') lookupChar(); });
-document.getElementById('poem-search-input').addEventListener('keydown', e=>{ if(e.key==='Enter') searchPoems(); });
+document.getElementById('poem-search-input').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); searchPoems(); } });
 </script>
 </body>
 </html>
