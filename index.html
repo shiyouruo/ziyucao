@@ -1394,6 +1394,8 @@ renderBio('zizhuan');
 function showSearchSub(which) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-search').classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('nav-search-btn').classList.add('active');
   closeAllMenus();
   if (which === 'dict') {
     document.getElementById('search-heading').textContent = '字典';
@@ -1461,7 +1463,7 @@ function searchPoems() {
   const box = document.getElementById('poem-search-result');
   if (!q) { box.innerHTML = '请输入关键词。'; return; }
   const all = [...poems.map((p,i)=>({...p,type:'诗'})), ...ciList.map(p=>({...p,type:'词'}))];
-  const hits = all.filter(p => p.title.includes(q) || p.lines.some(l=>l.text.includes(q)));
+  const hits = all.filter(p => p && p.title && p.lines && (p.title.includes(q) || p.lines.some(l=>l && l.text && l.text.includes(q))));
   if (!hits.length) { box.innerHTML = `未找到含「${q}」的诗句。`; return; }
   box.innerHTML = hits.map(p=>`<div class="poem-card" style="margin-bottom:1rem;"><div class="poem-title">${p.title}</div><div class="poem-body">${p.lines.map(l=>`<p>${l.text.replace(q,`<mark style="background:#f0d98a;padding:0 2px;">${q}</mark>`)}</p>`).join('')}</div></div>`).join('');
 }
