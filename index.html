@@ -275,7 +275,7 @@ const poems = [
     {text:'天公遗我厚，敢嗟生理微？', ann:[{word:'遗',note:'同馈，即给予。'},{word:'敢嗟生理微',note:'意思是：我哪敢哀叹我的生命微不足道呢？'}]},
   ]},
   { title:'五十感怀（二）', lines:[
-    {text:'大鹏抟九万，鹪鹩恋一枝。', ann:[{word:'大鹏抟九万',note:'引自《庄子·逍遥游》："鹏之徙于南冥也，水击三千里，抟扶摇而上者九万里"。扶摇：旋风，盘旋而上的暴风。'},{word:'鹪鹩',note:'音jiāo liáo，一种小鸟。'},{word:'抟',note:'音团，凭借（风力）盘旋飞翔。'}]},
+    {text:'大鹏抟九万，鹪鹩恋一枝。', ann:[{word:'大鹏抟九万',note:'引自《庄子·逍遥游》："鹏之徙于南冥也，水击三千里，抟扶摇而上者九万里"。抟：音团，凭借。扶摇：旋风，盘旋而上的暴风。'},{word:'鹪鹩',note:'音jiāo liáo，一种小鸟。'},{word:'抟',note:'音团，凭借（风力）盘旋飞翔。'}]},
     {text:'我无垂天翼，卑蓬乐安栖。'},
     {text:'朝起汲清浅，暮归慎门扉。'},
     {text:'悠悠冬复夏，仰观岁时移。'},
@@ -335,7 +335,7 @@ const poems = [
   { title:'生活小诗六题·围棋', lines:[
     {text:'白发欲满头，胜心未全戢。', ann:[{word:'戢',note:'音jí，停止。'}]},
     {text:'偶逢曹刘俦，犹整旗鼓敌。', ann:[{word:'俦',note:'音chóu，同辈。'}]},
-    {text:'密室对枯枰，眈眈坐屏息。'},
+    {text:'密室对枯枰，眈眈坐屏息。', ann:[{word:'枰',note:'音平，棋盘，特指围棋盘。'}]},
     {text:'烟长一寸灭，眉皱十道结。'},
     {text:'岂计光阴转，浑忘寒暑逼。'},
     {text:'严阵结长围，短兵奋孤窟。'},
@@ -451,7 +451,7 @@ const poems = [
       {text:'来书笔意过千金，戴镜趋窗细细吟。'},
       {text:'敲缺唾壶浑不觉，斯文扫地是伤心。'},
     ],
-    note:'敲缺唾壶：晋朝王敦有一次看到一篇好文章，一边看一边用铁如意敲着唾壶，不知不觉把壶边敲出许多缺口，意思是文章好。'
+    note:'敲缺唾壶：晋朝王敦有一次看到一篇好文章，一边看一边用如意敲着唾壶，不知不觉把壶边敲出许多缺口，意思是文章好。'
   },
   {
     title: '次韵菊味见寄（七）',
@@ -472,7 +472,7 @@ const poems = [
     subtitle: '（故乡俗习，以八月十六日为中秋节，是夕惊闻主席噩耗，时适有地震之警。）',
     lines: [
       {text:'一年容易过，又值秋凉天。'},
-      {text:'时清人忘老，地动月犹圆。', ann:[{word:'地动月犹圆',note:'此句为反话，文革时期实际上很乱。'}]},
+      {text:'时清人忘老，地动月犹圆。', ann:[{word:'时清人忘老',note:'此句为反话，文革时期实际上很乱。'}]},
       {text:'惊耗万户怵，哀歌四海传。'},
       {text:'愚智同有尽，相思一惘然。'},
     ]
@@ -504,10 +504,31 @@ const poems = [
     title: '与菊味同观省书画展（三）',
     lines: [
       {text:'小别人间草树秋，又携尊酒向层楼。'},
-      {text:'此身碌碌唯容醉，不管吴山点点愁。'},
+      {text:'此身碌碌唯容醉，不管吴山点点愁。', ann:[{word:'吴山点点愁',note:'出自白居易词：汴水流，泗水流，流到瓜洲古渡头，吴山点点愁。'}]},
     ],
-    note:'《汴水流，泗水流，流到瓜洲古渡头，吴山点点愁。》白居易'
   },
+  {title:'春雨有怀瞎兄', lines:[
+    {text:'妻买一斤蒿，兼以半斤肉。'},
+    {text:'我沽四两酒，据案成独酌。'},
+    {text:'太息春光老，珍重尊酒绿。'},
+    {text:'坐念瞎先生，此时卧孤独。'},
+    {text:'春雨息尔躬，过我应不速。'},
+    {text:'何计不出此，良机失摩轴。'},
+    {text:'人生多艰虞，灾祸时相逐。'},
+    {text:'念君江南客，来此穷山曲。'},
+    {text:'帽子千斤重，何时填沟壑。'},
+    {text:'我也同网鱼，同声泪一掬。'},
+    {text:'生时且相娱，莫问天地促。'},
+    {text:'我意只如此，此意何由达。'},
+    {text:'我歌君不闻，我饮君岂乐。'},
+    {text:'相思可奈何，且尽案前肉。'},
+  ]},
+  {title:'七月十日自南岸步行过长江大桥', lines:[
+    {text:'十里长桥徒步过，未忧足下起风波。'},
+    {text:'洪流汹涌安磐石，巨辂飞鸣腾浩歌。'},
+    {text:'伫立俄惊云雨逼，凭陵顿觉胆肝峨。'},
+    {text:'回看南岸楼台盛，却爱青葱北岸多。'},
+  ]},
   {title:'拟赠李兄', lines:[
     {text:'阊门联榻旧，越海大同乡。'},
     {text:'邂逅真萍水，情怀共雪霜。', ann:[{word:'雪霜',note:'谓其纯洁。'}]},
@@ -1892,10 +1913,10 @@ const ciList = [
 const ylArticles = {
   'xu-yu': {
     title:'俞序',
+    titleAnn:{word:'俞序',note:'俞律，江苏扬州人，号菊味，1946年毕业于上海中学，1951年毕业于光华大学。当代著名作家、诗人、书画家，中国作家协会会员，文学创作一级。历任南京市作家协会副主席、秘书长，南京市政协常委，江苏省文史研究馆馆员，江苏省诗词学会、南京市书法家协会顾问等职。'},
     body:`儒林俗薄，自古而然。左营右钻，内争外轧，名利是竞耳。然则果有薄名鄙利君子耶，曰：史兆伸君是焉。史君浙之四明人，早年以革命北走江浦，历四十余寒暑。今且两袖清风，白发有种，颓乎老矣。而生平于谋生之余，耽心吟咏，以诗自适。昔韩昌黎以为，物不得其平则鸣，而史君以鸣得祸。乃知鸣于言不若鸣于诗，既鸣于诗矣，久之而悟，诗者自娱之，具非鸣之物也。孟东野以诗鸣，故其声苦，人生几何，徒苦何为。故史君虽穷饿其身，思愁其心肠，终不为不幸而作寒蛩之鸣。其诗也淡泊如寒村小景，疏宕如秋林霜叶。吾初方之陶潜，而陶潜意在无怀葛天之民。而史君则植根当世，不存遐想，浸淫乎方城，混迹乎黑白。濯江流、挹山云、振清风、照明月，比之陶潜脚踏实地多矣。是则史君之诗不以名存，不以利作，不鸣而鸣矣。诚文苑之清品，吟坛之逸调也。吾与史君论交于大患难间，凡三十余载，共乎一舟，死生不渝其情。每读其诗，或为之嘻笑，或为之涕泣，灵犀一点互通方寸。吾不知史君，天下无人知史君矣。爰为序。`,
     sign:'甲戌惊蛰后十日菊味轩主俞律于南京',
-    note:'【注】然则：然而。无怀、葛天：传说中上古的帝王。寒蛩：音穷，蟋蟀。',
-    noteAnn:[{word:'然则',note:'然而。'},{word:'无怀、葛天',note:'传说中上古的帝王。'},{word:'寒蛩',note:'音穷，蟋蟀。'}]
+    noteAnn:[{word:'然则',note:'然而。'},{word:'无怀',note:'传说中上古的帝王，与葛天同。'},{word:'葛天',note:'传说中上古的帝王，与无怀同。'},{word:'寒蛩',note:'音穷，蟋蟀。'}]
   },
   'xu-ling': {
     title:'凌序',
@@ -2126,7 +2147,23 @@ function renderYl(key) {
   if (!a) return;
   document.getElementById('yl-heading').textContent = a.title;
   let bodyHtml = a.body.split('\n').join('<br>');
-  let html = `<div class="article-card"><div class="article-title">${a.title}</div><div class="article-body">${bodyHtml}</div>`;
+  // Apply noteAnn popup annotations to body text
+  if (a.noteAnn) {
+    a.noteAnn.forEach((ann, ai) => {
+      const annKey = `yl_${key}_${ai}`;
+      annData[annKey] = ann;
+      const span = `<span class="ann" onclick="showPopupByKey(event,'${annKey}')">${ann.word}</span>`;
+      bodyHtml = bodyHtml.replace(ann.word, span);
+    });
+  }
+  // Title annotation for 俞序
+  let titleHtml = a.title;
+  if (a.titleAnn) {
+    const tKey = `yl_title_${key}`;
+    annData[tKey] = a.titleAnn;
+    titleHtml = `<span class="ann" onclick="showPopupByKey(event,'${tKey}')">${a.title}</span>`;
+  }
+  let html = `<div class="article-card"><div class="article-title">${titleHtml}</div><div class="article-body">${bodyHtml}</div>`;
   if (a.sign) html += `<div class="article-sign">${a.sign}</div>`;
   if (a.note) html += `<div class="article-note">${a.note}</div>`;
   html += `</div>`;
