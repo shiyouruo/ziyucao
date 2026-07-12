@@ -204,6 +204,7 @@
       <div class="nav-item" id="nav-search-wrap">
         <button id="nav-search-btn" onclick="showSearchSub('site')">站内搜索</button>
       </div>
+
     </nav>
   </header>
 
@@ -1997,6 +1998,7 @@ function renderPoem(idx) {
 }
 
 function showPoem(idx) {
+  try { localStorage.setItem('zy_last', JSON.stringify({type:'poem',idx:idx})); } catch(e) {}
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-shi').classList.add('active');
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
@@ -2046,6 +2048,34 @@ document.getElementById('pwd-input').addEventListener('input', function() {
         document.getElementById('main').classList.add('show');
         buildPoemMenu();
         buildCiMenu();
+        try {
+          const last = JSON.parse(localStorage.getItem('zy_last'));
+          if (last) {
+            if (last.type === 'poem') showPoem(last.idx);
+            else if (last.type === 'ci') showCi(last.idx);
+            else if (last.type === 'yl') showYl(last.key);
+            else if (last.type === 'bio') showBio(last.key);
+            else if (last.type === 'search') showSearchSub('site');
+          }
+        } catch(e) {}
+        // Check bookmark
+        try {
+          const bm = JSON.parse(sessionStorage.getItem('ziyucao_bookmark'));
+          if (bm) {
+            const bmBar = document.getElementById('bookmark-bar');
+            const bmText = document.getElementById('bookmark-text');
+            bmText.textContent = '上次读到：' + bm.title;
+            bmBar.style.display = 'flex';
+            document.getElementById('bookmark-go').onclick = () => {
+              bmBar.style.display = 'none';
+              if (bm.type === 'poem') showPoem(bm.idx);
+              else showCi(bm.idx);
+            };
+            document.getElementById('bookmark-close').onclick = () => {
+              bmBar.style.display = 'none';
+            };
+          }
+        } catch(e) {}
       }, 800);
     } else {
       document.getElementById('pwd-error').textContent = '密码有误，请重试';
@@ -2090,6 +2120,7 @@ function renderCi(idx) {
 }
 
 function showCi(idx) {
+  try { localStorage.setItem('zy_last', JSON.stringify({type:'ci',idx:idx})); } catch(e) {}
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-ci').classList.add('active');
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
@@ -2171,6 +2202,7 @@ function renderYl(key) {
 }
 
 function showYl(key) {
+  try { localStorage.setItem('zy_last', JSON.stringify({type:'yl',key:key})); } catch(e) {}
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-yl').classList.add('active');
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
@@ -2202,6 +2234,7 @@ function renderBio(key) {
 }
 
 function showBio(key) {
+  try { localStorage.setItem('zy_last', JSON.stringify({type:'bio',key:key})); } catch(e) {}
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-bio').classList.add('active');
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
@@ -2212,7 +2245,10 @@ function showBio(key) {
 renderBio('zizhuan');
 
 // ── 搜索 ──
+
+
 function showSearchSub(which) {
+  try { localStorage.setItem('zy_last', JSON.stringify({type:'search'})); } catch(e) {}
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-search').classList.add('active');
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
