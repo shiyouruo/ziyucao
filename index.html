@@ -84,8 +84,8 @@
   .poem-card:hover { box-shadow:4px 4px 16px rgba(181,137,74,0.1); }
   .poem-title { font-size:1.35rem; font-weight:600; color:var(--ink-soft); letter-spacing:0.2em; margin-bottom:0.6rem; }
   .poem-subtitle { font-size:0.82rem; color:#7a6040; line-height:1.8; margin-bottom:0.8rem; font-style:italic; }
-  .poem-body { font-size:1.15rem; line-height:2.6; color:var(--ink); }
-  .poem-body p { margin:0; }
+  .poem-body { font-size:1.08rem; line-height:2.4; color:var(--ink); }
+  .poem-body p { margin:0; white-space:nowrap; overflow:hidden; text-overflow:clip; }
   .poem-note { margin-top:0.8rem; font-size:0.82rem; color:#7a6040; font-style:italic; line-height:1.8; border-top:1px solid var(--silk-dk); padding-top:0.6rem; }
   .ann { color:#1a5cb5; text-decoration:underline; text-decoration-color:#1a5cb5; text-underline-offset:3px; cursor:pointer; transition:color 0.2s; }
   .ann:hover { color:#0e3d82; }
@@ -2048,34 +2048,18 @@ document.getElementById('pwd-input').addEventListener('input', function() {
         document.getElementById('main').classList.add('show');
         buildPoemMenu();
         buildCiMenu();
-        try {
-          const last = JSON.parse(localStorage.getItem('zy_last'));
-          if (last) {
-            if (last.type === 'poem') showPoem(last.idx);
-            else if (last.type === 'ci') showCi(last.idx);
-            else if (last.type === 'yl') showYl(last.key);
-            else if (last.type === 'bio') showBio(last.key);
-            else if (last.type === 'search') showSearchSub('site');
-          }
-        } catch(e) {}
-        // Check bookmark
-        try {
-          const bm = JSON.parse(sessionStorage.getItem('ziyucao_bookmark'));
-          if (bm) {
-            const bmBar = document.getElementById('bookmark-bar');
-            const bmText = document.getElementById('bookmark-text');
-            bmText.textContent = '上次读到：' + bm.title;
-            bmBar.style.display = 'flex';
-            document.getElementById('bookmark-go').onclick = () => {
-              bmBar.style.display = 'none';
-              if (bm.type === 'poem') showPoem(bm.idx);
-              else showCi(bm.idx);
-            };
-            document.getElementById('bookmark-close').onclick = () => {
-              bmBar.style.display = 'none';
-            };
-          }
-        } catch(e) {}
+        setTimeout(() => {
+          try {
+            const last = JSON.parse(localStorage.getItem('zy_last'));
+            if (last) {
+              if (last.type === 'poem') showPoem(last.idx);
+              else if (last.type === 'ci') showCi(last.idx);
+              else if (last.type === 'yl') showYl(last.key);
+              else if (last.type === 'bio') showBio(last.key);
+              else if (last.type === 'search') showSearchSub('site');
+            }
+          } catch(e) {}
+        }, 300);
       }, 800);
     } else {
       document.getElementById('pwd-error').textContent = '密码有误，请重试';
@@ -2281,7 +2265,20 @@ function searchPoems() {
   const all = [...poems.map((p,i)=>({...p,type:'诗'})), ...ciList.map(p=>({...p,type:'词'}))];
   const hits = all.filter(p => p && p.title && p.lines && (p.title.includes(q) || p.lines.some(l=>l && l.text && l.text.includes(q))));
   if (!hits.length) { box.innerHTML = `未找到含「${q}」的诗句。`; return; }
-  box.innerHTML = hits.map(p=>`<div class="poem-card" style="margin-bottom:1rem;"><div class="poem-title">${p.title}</div><div class="poem-body">${p.lines.map(l=>`<p>${l.text.replace(q,`<mark style="background:#f0d98a;padding:0 2px;">${q}</mark>`)}</p>`).join('')}</div></div>`).join('');
+  box.innerHTML = hits.map((p,pi)=>{
+    const lines = p.lines.map((l,li)=>{
+      let lineHtml = l.text.replace(q,`<mark style="background:#f0d98a;padding:0 2px;">${q}</mark>`);
+      if (l.ann) {
+        l.ann.forEach((a,ai) => {
+          const key = `sr_${pi}_${li}_${ai}`;
+          annData[key] = a;
+          lineHtml = lineHtml.replace(a.word, `<span class="ann" onclick="showPopupByKey(event,'${key}')">${a.word}</span>`);
+        });
+      }
+      return `<p>${lineHtml}</p>`;
+    }).join('');
+    return `<div class="poem-card" style="margin-bottom:1rem;"><div class="poem-title">${p.title}</div><div class="poem-body">${lines}</div></div>`;
+  }).join('');
 }
 
 // ── 菜单控制 ──
